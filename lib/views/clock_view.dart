@@ -25,7 +25,7 @@ class _ClockViewState extends State<ClockView> {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
-      child: Container(
+      child: SizedBox(
         width: widget.size,
         height: widget.size,
         child: Transform.rotate(
