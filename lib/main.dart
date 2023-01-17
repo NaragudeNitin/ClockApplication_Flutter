@@ -1,8 +1,9 @@
+import 'package:clock_application_flutter/alarm_page.dart';
 import 'package:clock_application_flutter/enums.dart';
 import 'package:clock_application_flutter/views/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:clock_application_flutter/menu_info.dart';
+import 'package:clock_application_flutter/models/menu_info.dart';
 
 void main() {
   runApp( const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider<MenuInfo>(
         create: (BuildContext context) => MenuInfo(MenuType.clock, ),
-      child: const Homepage()),
+      child: const AlarmPage()),
       
     );
   }
