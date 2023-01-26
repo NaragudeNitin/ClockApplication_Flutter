@@ -2,7 +2,7 @@ import 'package:clock_application_flutter/enums.dart';
 
 import 'models/alarm_info.dart';
 import 'models/menu_info.dart';
-import 'theme_data.dart';
+import 'themes/theme_data.dart';
 
 List<MenuInfo> menuItems = [
   MenuInfo(MenuType.clock, title: "Clock", 

@@ -9,9 +9,9 @@ class MenuInfo extends ChangeNotifier{
   MenuInfo(this.menuType, {  this.title,   this.imageSource});
 
   updateMenu(MenuInfo menuInfo){
-    this.menuType = menuInfo.menuType;
-    this.title = menuInfo.title;
-    this.imageSource = menuInfo.imageSource;
+    menuType = menuInfo.menuType;
+    title = menuInfo.title;
+    imageSource = menuInfo.imageSource;
 
     //important because whenever you update the model you have
     //to trigger this event to notify all the consumers listening to it

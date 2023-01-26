@@ -2,7 +2,7 @@ import 'package:clock_application_flutter/views/clock_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import 'package:clock_application_flutter/theme_data.dart';
+import 'package:clock_application_flutter/themes/theme_data.dart';
 class ClockPage extends StatefulWidget {
   const ClockPage({super.key});
 

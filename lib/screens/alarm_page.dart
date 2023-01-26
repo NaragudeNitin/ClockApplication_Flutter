@@ -1,11 +1,20 @@
 import 'package:clock_application_flutter/data.dart';
+import 'package:clock_application_flutter/main.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:clock_application_flutter/theme_data.dart';
-import 'package:intl/intl.dart';
+import 'package:clock_application_flutter/themes/theme_data.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class AlarmPage extends StatefulWidget {
   const AlarmPage({super.key});
+
+  // tz.InitializeTimeZone();
+  // tz.setLocalLocation(
+  //   tz.getLocation
+  // );
+  
 
   @override
   State<AlarmPage> createState() => _AlarmPageState();
@@ -28,7 +37,7 @@ class _AlarmPageState extends State<AlarmPage> {
               fontSize: 24,
             ),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Expanded(
             child: ListView(
               children: alarms.map<Widget>((alarm) {
@@ -118,7 +127,7 @@ class _AlarmPageState extends State<AlarmPage> {
                   color: CustomColors.clockOutline,
                   borderType: BorderType.RRect,
                   radius: const Radius.circular(24),
-                  dashPattern: [5,4],
+                  dashPattern: const [5,4],
                   child: Container(
                     width: double.infinity,
                     // color: CustomColors.clockBG,
@@ -130,7 +139,7 @@ class _AlarmPageState extends State<AlarmPage> {
                     ),
                     
                     child: TextButton(                      
-                        onPressed: () {},
+                        onPressed: () {showNotification(0, "Alarm1", "sd csdn,vbjdfnvsm");},
                         child: Column(
                           children: const [
                             Icon(Icons.add_alarm),
@@ -153,4 +162,70 @@ class _AlarmPageState extends State<AlarmPage> {
       ),
     );
   }
+
+
+  Future<void> showNotification(int id, String title, String body) async {
+    var currentDateTime = tz.TZDateTime.now(tz.local).add(const Duration(
+          seconds: 1));
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      currentDateTime,
+           
+       const NotificationDetails(
+        android: AndroidNotificationDetails('main_channel', 'Main Channel',
+            channelDescription: "ashwin",
+            importance: Importance.max,
+            priority: Priority.max),
+       
+      ), androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+
+    );
+
+  /* void scheduleAlarm() async{
+    var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 10));
+
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+      "alarm_notifi",
+       "alarm_Notifi",
+       icon: 'flutterlogo',
+       sound: RawResourceAndroidNotificationSound('a_long_cold_string'),
+       );
+
+    var platformChannelSpecifics = NotificationDetails();
+
+    await flutterLocalNotificationsPlugin.schedule(
+      0,
+      "title",
+      "Good Morning Time to leave",
+      scheduleNotificationDateTime,
+      platformChannelSpecifics,
+      );
+  } */
 }
+}
+
+/* 
+Future<void> showNotification(int id, String title, String body) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.now(tz.local).add(Duration(
+          seconds: 1)), //schedule the notification to show after 2 seconds.
+      const NotificationDetails(
+         
+        // Android details
+        android: AndroidNotificationDetails('main_channel', 'Main Channel',
+            channelDescription: "ashwin",
+            importance: Importance.max,
+            priority: Priority.max),
+        // iOS details
+        iOS: IOSNotificationDetails(
+          sound: 'default.wav',
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
+      ), */

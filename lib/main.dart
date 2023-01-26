@@ -1,12 +1,17 @@
-import 'package:clock_application_flutter/alarm_page.dart';
+import 'package:clock_application_flutter/screens/alarm_page.dart';
 import 'package:clock_application_flutter/enums.dart';
-import 'package:clock_application_flutter/views/homepage.dart';
+import 'package:clock_application_flutter/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:clock_application_flutter/models/menu_info.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-void main() {
-  runApp( const MyApp());
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,9 +27,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider<MenuInfo>(
-        create: (BuildContext context) => MenuInfo(MenuType.clock, ),
-      child: const AlarmPage()),
-      
+          create: (BuildContext context) => MenuInfo(
+                MenuType.clock,
+              ),
+          child: const Homepage()),
     );
   }
 }

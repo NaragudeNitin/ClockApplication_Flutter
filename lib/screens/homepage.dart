@@ -1,12 +1,11 @@
-import 'package:clock_application_flutter/alarm_page.dart';
-import 'package:clock_application_flutter/clock_page.dart';
+import 'package:clock_application_flutter/screens/alarm_page.dart';
 import 'package:clock_application_flutter/data.dart';
 import 'package:clock_application_flutter/enums.dart';
-import 'package:clock_application_flutter/views/clock_view.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:clock_application_flutter/models/menu_info.dart';
+
+import 'clock_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -38,12 +37,12 @@ class _HomepageState extends State<Homepage> {
           ),
           Expanded(
             child: Consumer<MenuInfo>(
-              builder: (context, value, child) {
+              builder: (context, value, Widget? child) {
                 if (value.menuType == MenuType.alarm) {
                   return const AlarmPage();
-                } /* else if(value.menuType == MenuType.clock){
+                } else if(value.menuType == MenuType.clock){
                   return const ClockPage();
-                }*/
+                }
                 else {
                   return Container(
                     child: RichText(
@@ -68,7 +67,7 @@ class _HomepageState extends State<Homepage> {
 
   Widget buildMenuButton(MenuInfo currentMenuInfo) {
     return Consumer<MenuInfo>(
-      builder: (context, value, child) {
+      builder: (context, value, Widget? child) {
         return SizedBox(
           height: 100,
           width: 70,
@@ -89,14 +88,14 @@ class _HomepageState extends State<Homepage> {
               child: Column(
                 children: <Widget>[
                   Image.asset(
-                    currentMenuInfo.imageSource!,
+                    currentMenuInfo.imageSource?? " ",
                     scale: 1.5,
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
-                    currentMenuInfo.title!,
+                    currentMenuInfo.title?? " ",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,
